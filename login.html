@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="signupstyle.css">
+</head>
+<body>
+    <div class="container">
+        <form id="form" action="/">
+            <h1>Sign Up</h1>
+            <div class="input-control">
+                <input id="username" name="username" type="text" placeholder="Username">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <input id="password" name="password" type="password" placeholder="Password">
+                <div class="error"></div>
+            </div>
+            <div class="login-section">
+                <p>Don't have an account?</p>
+                <button type="button" class="login-btn" onclick="window.location.href='signup.html'">Sign up here</button>
+            </div>
+            <button type="submit" onclick="window.location.href='index.html'">Log in</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
