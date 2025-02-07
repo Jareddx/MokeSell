@@ -74,3 +74,40 @@ const validateInputs = () => {
         setSuccess(password2);
     }
 };
+
+const API_URL = "https://mokesell-8e7e.restdb.io/rest/listings"; // Replace with your actual RestDB API URL
+const API_KEY = "67a59a029c97970a4c1b2a74"; // Replace with your API key
+
+async function fetchListings() {
+    try {
+        const response = await fetch(API_URL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": API_KEY
+            }
+        });
+
+        const listings = await response.json();
+        const listingsGrid = document.querySelector(".listing-grid");
+
+        listingsGrid.innerHTML = listings.map(listing => `
+            <div class="listing-card" onclick="viewListing('${listing._id}')">
+                <img src="${listing.image}" alt="${listing.title}" class="listing-image">
+                <div class="listing-info">
+                  <h3>${listing.title}</h3>
+                  <p>${listing.description}</p>
+                  <p>$${listing.price}</p>
+                </div>
+            </div>
+        `).join("");
+    } catch (error) {
+        console.error("Error fetching listings:", error);
+    }
+}
+
+function viewListing(listingId) {
+    window.location.href = `listing.html?id=${listingId}`;
+}
+
+document.addEventListener("DOMContentLoaded", fetchListings);

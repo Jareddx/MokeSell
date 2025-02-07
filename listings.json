@@ -1,0 +1,6 @@
+[
+    { "id": 1, "title": "Honda Civic", "image": "Photos/Honda.jpg", "description": "A sleek and aerodynamic front design", "price": "$120,000" },
+    { "id": 2, "title": "Roblox Giftcards", "image": "Photos/roblox.jpg", "description": "Fast and Quick Transactions", "price": "$10" },
+    { "id": 3, "title": "Multi-Coloured Crocs", "image": "Photos/croc.jpg", "description": "Durable & Brand New", "price": "$99.99" },
+    { "id": 4, "title": "Monkey Plushie", "image": "Photos/monkey.jpg", "description": "Limited Time CNY Only", "price": "$39.99" }
+]
