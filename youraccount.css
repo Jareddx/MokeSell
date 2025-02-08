@@ -144,6 +144,14 @@ body {
   padding: 20px 0;
 }
 
+.account-info-box {
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Spacing inside the box */
+  background-color: white; /* White background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-bottom: 20px; /* Space below the box */
+}
 /* Profile Header */
 .profile-header h2 {
   font-size: 24px;
