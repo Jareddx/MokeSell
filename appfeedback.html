@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Rating Feedback</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .feedback-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 20px; /* Increased spacing between stars */
+        }
+
+        .star-rating .star {
+            font-size: 50px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .star-rating .star .half {
+            position: absolute;
+            left: 0;
+            width: 50%;
+            overflow: hidden;
+            color: transparent; /* Hide the default star */
+        }
+
+        .star-rating .star .half::before {
+            content: '★';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            color: #ffcc00; /* Yellow color for half stars */
+        }
+
+        .star-rating .star.active {
+            color: #ffcc00; /* Yellow color for active stars */
+        }
+
+        .message-section {
+            margin-bottom: 20px;
+        }
+
+        .message-section textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 100px;
+        }
+
+        .submit-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="feedback-container">
+        <h1>Feedback</h1>
+
+        <!-- Star Rating Section -->
+        <div class="star-rating">
+            <span class="star" data-value="1">
+                <span class="half"></span>
+                ★
+            </span>
+            <span class="star" data-value="2">
+                <span class="half"></span>
+                ★
+            </span>
+            <span class="star" data-value="3">
+                <span class="half"></span>
+                ★
+            </span>
+            <span class="star" data-value="4">
+                <span class="half"></span>
+                ★
+            </span>
+            <span class="star" data-value="5">
+                <span class="half"></span>
+                ★
+            </span>
+        </div>
+
+        <!-- Message Section -->
+        <div class="message-section">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Enter your feedback here..."></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="submit-button">Submit</button>
+    </div>
+
+    <script>
+        // JavaScript for Star Rating System with Half-Stars
+        const stars = document.querySelectorAll('.star-rating .star');
+        let selectedRating = 0;
+
+        stars.forEach(star => {
+            star.addEventListener('click', function (event) {
+                const rect = star.getBoundingClientRect();
+                const clickX = event.clientX - rect.left; // X position of the click within the star
+                const starWidth = rect.width;
+                const isHalf = clickX < starWidth / 2; // Check if click is on the left half
+
+                const value = parseFloat(this.getAttribute('data-value'));
+                selectedRating = isHalf ? value - 0.5 : value;
+
+                // Update stars to reflect the selected rating
+                stars.forEach(s => {
+                    const starValue = parseFloat(s.getAttribute('data-value'));
+                    if (starValue <= selectedRating) {
+                        s.classList.add('active');
+                        s.querySelector('.half').style.display = 'none'; // Hide half-star
+                    } else if (starValue - 0.5 === selectedRating) {
+                        s.classList.add('active');
+                        s.querySelector('.half').style.display = 'block'; // Show half-star
+                    } else {
+                        s.classList.remove('active');
+                        s.querySelector('.half').style.display = 'none'; // Hide half-star
+                    }
+                });
+
+                console.log('Selected Rating:', selectedRating);
+            });
+
+            star.addEventListener('mouseover', function (event) {
+                const rect = star.getBoundingClientRect();
+                const hoverX = event.clientX - rect.left; // X position of the hover within the star
+                const starWidth = rect.width;
+                const isHalf = hoverX < starWidth / 2; // Check if hover is on the left half
+
+                const value = parseFloat(this.getAttribute('data-value'));
+                const hoverRating = isHalf ? value - 0.5 : value;
+
+                // Highlight stars on hover
+                stars.forEach(s => {
+                    const starValue = parseFloat(s.getAttribute('data-value'));
+                    if (starValue <= hoverRating) {
+                        s.classList.add('active');
+                        s.querySelector('.half').style.display = 'none'; // Hide half-star
+                    } else if (starValue - 0.5 === hoverRating) {
+                        s.classList.add('active');
+                        s.querySelector('.half').style.display = 'block'; // Show half-star
+                    } else {
+                        s.classList.remove('active');
+                        s.querySelector('.half').style.display = 'none'; // Hide half-star
+                    }
+                });
+            });
+
+            star.addEventListener('mouseout', function () {
+                // Revert to selected rating after hover
+                stars.forEach(s => {
+                    const starValue = parseFloat(s.getAttribute('data-value'));
+                    if (starValue <= selectedRating) {
+                        s.classList.add('active');
+                        s.querySelector('.half').style.display = 'none'; // Hide half-star
+                    } else if (starValue - 0.5 === selectedRating) {
+                        s.classList.add('active');
+                        s.querySelector('.half').style.display = 'block'; // Show half-star
+                    } else {
+                        s.classList.remove('active');
+                        s.querySelector('.half').style.display = 'none'; // Hide half-star
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
