@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MokeSell - Buy, Sell & Discover.">
+    <title>Listing Details</title>
+    <link rel="stylesheet" href="gamerewards.css">
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">MokeSell</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Electronics</a></li>
+                    <li><a href="#">Fashion</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Games</a></li>
+                    <li><a href="#">Luxury</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <div class="icon" aria-label="Reviews">R</div>
+                <div class="icon" aria-label="Favorites">♥</div>
+                <button class="icon" aria-label="Cart" onclick="window.location.href='cart.html'">🛒</button>
+                <button class="icon" aria-label="Profile" onclick="window.location.href='signup.html'">👤</button>
+                <button class="sell-btn">Sell Now</button>
+            </div>
+        </div>
+
+        <div class="bottom-header">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for an item..." aria-label="Search">
+            </div>
+            <button class="search-btn">Search</button>
+        </div>
+    </header>
+    <body>
+        
+        <main>
+            <section class="promo-section">
+                <div class="promo-cards">
+                    <div class="promo-card">
+                        <h3>$5 Voucher Discount</h3>
+                        <button class="promo-btn" onclick="window.location.href='#'">Claim</button>
+                    </div>
+                    <div class="promo-card">
+                        <h3>$10 Voucher Discount</h3>
+                        <button class="promo-btn" onclick="window.location.href='#'">Claim</button>
+                    </div>
+                    <div class="promo-card">
+                        <h3>Scratch Card</h3>
+                        <button class="promo-btn" onclick="window.location.href='game.html'">Claim</button>
+                    </div>
+                </div>
+            </section>s
+        </main>
+        
+        
+    </body>
+    <footer class="mokesell-footer">
+        <div class="footer-container">
+            <div class="footer-section company-info">
+                <h3>MokeSell</h3>
+                <p>Buy & Sell with confidence on MokeSell. The best marketplace for everything you need.</p>
+                <p>&copy; 2025 MokeSell. All rights reserved.</p>
+            </div>
+    
+            <div class="footer-section support">
+                <h4>Customer Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-section social-media">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="Photos/facebook-icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="Photos/twitter-icon.png" alt="Twitter"></a>
+                    <a href="#"><img src="Photos/instagram-icon.png" alt="Instagram"></a>
+                </div>
+            </div>
+    
+            <div class="footer-section app-promotion">
+                <h4>Get the App</h4>
+                <div class="app-buttons">
+                    <img src="Photos/google-play.png" alt="Google Play">
+                    <img src="Photos/app-store.png" alt="App Store">
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("https://mokesell-8e7e.restdb.io/rest/listings", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": "67a59a029c97970a4c1b2a74",
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                // Shuffle the listings array
+                const shuffledListings = data.sort(() => 0.5 - Math.random());
+
+                // Select a limited number of listings (e.g., 8)
+                const selectedListings = shuffledListings.slice(0, 8);
+
+                // Get the listings container
+                const listingsContainer = document.getElementById("listings-container");
+                listingsContainer.innerHTML = ""; // Clear previous content
+                
+                selectedListings.forEach(listing => {
+                    // Create listing card
+                    const listingElement = document.createElement("div");
+                    listingElement.classList.add("listing-card");
+                    listingElement.onclick = () => {
+                        window.location.href = `listing.html?listingid=${listing.listingid}`;
+                    };
+
+                    listingElement.innerHTML = `
+                        <img src="${listing.image}" alt="${listing.title}" class="listing-image">
+                        <div class="listing-info">
+                            <h3>${listing.title}</h3>
+                            <p>${listing.description.substring(0, 50)}...</p>
+                            <p class="price"><strong>$${listing.price}</strong></p>
+                        </div>
+                    `;
+
+                    // Append listing to container
+                    listingsContainer.appendChild(listingElement);
+                });
+            } else {
+                document.getElementById("listings-container").innerHTML = "<p>No listings available.</p>";
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching listings:", error);
+            document.getElementById("listings-container").innerHTML = "<p>Error loading listings.</p>";
+        });
+    });
+</script>
+
+
+
+</html>
