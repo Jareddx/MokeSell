@@ -5,60 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MokeSell - Buy, Sell & Discover.">
     <title>Listing Details</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="listingstyle.css">
 </head>
 <body>
     <header>
-        <h1>Listing Details</h1>
+        <div class="top-header">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">MokeSell</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Electronics</a></li>
+                    <li><a href="#">Fashion</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Games</a></li>
+                    <li><a href="#">Luxury</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <div class="icon" aria-label="Reviews">R</div>
+                <div class="icon" aria-label="Favorites">♥</div>
+                <button class="icon" aria-label="Cart" onclick="window.location.href='cart.html'">🛒</button>
+                <button class="icon" aria-label="Profile" onclick="window.location.href='signup.html'">👤</button>
+                <button class="sell-btn">Sell Now</button>
+            </div>
+        </div>
+
+        <div class="bottom-header">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for an item..." aria-label="Search">
+            </div>
+            <button class="search-btn">Search</button>
+        </div>
     </header>
 
     <main>
-        <div id="listing-details">
+        <div id="listing-details" class="listing-container">
             <p>Loading listing details...</p>
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 MokeSell</p>
+    <footer class="mokesell-footer">
+        <div class="footer-container">
+            <div class="footer-section company-info">
+                <h3>MokeSell</h3>
+                <p>Buy & Sell with confidence on MokeSell. The best marketplace for everything you need.</p>
+                <p>&copy; 2025 MokeSell. All rights reserved.</p>
+            </div>
+    
+            <div class="footer-section support">
+                <h4>Customer Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-section social-media">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="Photos/facebook-icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="Photos/twitter-icon.png" alt="Twitter"></a>
+                    <a href="#"><img src="Photos/instagram-icon.png" alt="Instagram"></a>
+                </div>
+            </div>
+    
+            <div class="footer-section app-promotion">
+                <h4>Get the App</h4>
+                <div class="app-buttons">
+                    <img src="Photos/google-play.png" alt="Google Play">
+                    <img src="Photos/app-store.png" alt="App Store">
+                </div>
+            </div>
+        </div>
     </footer>
-
     <script>
-        // Get the listingid from the URL query parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const listingid = urlParams.get('listingid');  // Correct key: 'listingid'
-
-        if (!listingid) {
-            document.getElementById('listing-details').innerHTML = "<p>Error: Listing ID not provided!</p>";
-        } else {
-            // Fetch listing details from API based on listingid
-            fetch(`https://mokesell-8e7e.restdb.io/rest/listings?q={"listingid":${listingid}}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-apikey": "67a59a029c97970a4c1b2a74",  // Make sure to replace with your API key
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    const listing = data[0];  // Assuming the data returns an array of listings
-
-                    // Show listing details
-                    document.getElementById('listing-details').innerHTML = `
-                        <h2>${listing.title}</h2>
-                        <img src="${listing.image}" alt="${listing.title}" class="listing-image">
-                        <p>${listing.description}</p>
-                        <p><strong>Price: $${listing.price}</strong></p>
-                    `;
-                } else {
-                    document.getElementById('listing-details').innerHTML = "<p>Listing not found.</p>";
-                }
-            })
-            .catch(error => {
-                console.error('Error loading listing:', error);
-                document.getElementById('listing-details').innerHTML = "<p>Error loading listing details. Please try again later.</p>";
-            });
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the listingid from the URL query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const listingid = urlParams.get('listingid');  
+    
+            if (!listingid) {
+                document.getElementById('listing-details').innerHTML = "<p>Error: Listing ID not provided!</p>";
+            } else {
+                fetch(`https://mokesell-8e7e.restdb.io/rest/listings?q={"listingid":${listingid}}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-apikey": "67a59a029c97970a4c1b2a74",  // Replace with your API key
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const listing = data[0];  
+    
+                        // Insert listing details into the HTML
+                        document.getElementById('listing-details').innerHTML = `
+                            <div class="listing-content">
+                                <div class="listing-image-container">
+                                    <img src="${listing.image}" alt="${listing.title}" class="listing-image">
+                                </div>
+                                <div class="listing-info">
+                                    <h2>${listing.title}</h2>
+                                    <p class="description">${listing.description}</p>
+                                    <p class="price">$${listing.price}</p>
+                                    <div class="buttons">
+                                        <button class="chat-btn">Chat with Seller</button>
+                                        <button class="cart-btn" id="add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+    
+                        // Event listener for the "Add to Cart" button
+                        document.getElementById("add-to-cart-btn").addEventListener("click", function () {
+                            const cartItem = {
+                                id: listing.listingid,
+                                title: listing.title,
+                                price: listing.price,
+                                image: listing.image,
+                                quantity: 1,  // Default quantity is 1
+                            };
+    
+                            // Get current cart from localStorage, or initialize an empty array if not yet created
+                            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+                            // Check if the item already exists in the cart
+                            const existingItemIndex = cart.findIndex(item => item.id === listing.listingid);
+    
+                            if (existingItemIndex > -1) {
+                                // If item exists, update its quantity
+                                cart[existingItemIndex].quantity += 1;
+                            } else {
+                                // If item doesn't exist, add a new item to the cart
+                                cart.push(cartItem);
+                            }
+    
+                            // Save the updated cart back to localStorage
+                            localStorage.setItem("cart", JSON.stringify(cart));
+    
+                            // Optional: Provide feedback to the user
+                            alert(`${listing.title} has been added to your cart!`);
+                        });
+                    } else {
+                        document.getElementById('listing-details').innerHTML = "<p>Listing not found.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading listing:', error);
+                    document.getElementById('listing-details').innerHTML = "<p>Error loading listing details. Please try again later.</p>";
+                });
+            }
+        });
     </script>
+    
 </body>
 </html>

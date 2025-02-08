@@ -1,6 +1,44 @@
 [
-    { "id": 1, "title": "Honda Civic", "image": "Photos/Honda.jpg", "description": "A sleek and aerodynamic front design", "price": "$120,000" },
-    { "id": 2, "title": "Roblox Giftcards", "image": "Photos/roblox.jpg", "description": "Fast and Quick Transactions", "price": "$10" },
-    { "id": 3, "title": "Multi-Coloured Crocs", "image": "Photos/croc.jpg", "description": "Durable & Brand New", "price": "$99.99" },
-    { "id": 4, "title": "Monkey Plushie", "image": "Photos/monkey.jpg", "description": "Limited Time CNY Only", "price": "$39.99" }
+    {
+        "id": 5,
+        "title": "Apple iPhone 15 Pro",
+        "image": "Photos/apple.jpg",
+        "description": "Experience cutting-edge technology with the iPhone 15 Pro. Featuring an A17 Bionic chip, a stunning Super Retina XDR display, and a powerful triple-lens camera system for pro-level photography.",
+        "price": "$999"
+    },
+    {
+        "id": 6,
+        "title": "Samsung 65-inch 4K Smart TV",
+        "image": "Photos/samsung.jpg",
+        "description": "Immerse yourself in breathtaking 4K Ultra HD resolution with this Samsung Smart TV. Featuring vibrant colors, built-in streaming apps, and voice control compatibility for the ultimate home entertainment experience.",
+        "price": "$799"
+    },
+    {
+        "id": 7,
+        "title": "Nike Air Force 1 Sneakers",
+        "image": "Photos/nike.jpg",
+        "description": "Step into timeless style with the classic Nike Air Force 1 sneakers. Crafted with premium leather, superior cushioning, and an iconic design that never goes out of fashion.",
+        "price": "$120"
+    },
+    {
+        "id": 8,
+        "title": "PlayStation 5 Console",
+        "image": "Photos/ps5.jpg",
+        "description": "Experience next-gen gaming with the PlayStation 5. Ultra-fast SSD, stunning 4K graphics, and a revolutionary DualSense controller for immersive gameplay like never before.",
+        "price": "$499"
+    },
+    {
+        "id": 9,
+        "title": "Dyson V15 Cordless Vacuum",
+        "image": "Photos/vacuum.jpg",
+        "description": "Powerful deep cleaning with laser dust detection technology. The Dyson V15 cordless vacuum delivers exceptional suction and an intelligent display for real-time performance tracking.",
+        "price": "$699"
+    },
+    {
+        "id": 10,
+        "title": "Gucci GG Marmont Shoulder Bag",
+        "image": "Photos/gucci.jpg",
+        "description": "Elevate your fashion with the Gucci GG Marmont bag. Luxurious leather, a signature gold-tone logo, and a versatile chain strap make this a must-have accessory.",
+        "price": "$2,300"
+    }
 ]

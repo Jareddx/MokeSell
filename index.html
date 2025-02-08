@@ -10,7 +10,9 @@
 <body>
     <header>
         <div class="top-header">
-            <div class="logo">MokeSell</div>
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">MokeSell</a>
+            </div>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#">Electronics</a></li>
@@ -23,7 +25,7 @@
             <div class="nav-icons">
                 <div class="icon" aria-label="Reviews">R</div>
                 <div class="icon" aria-label="Favorites">♥</div>
-                <div class="icon" aria-label="Cart">🛒</div>
+                <button class="icon" aria-label="Cart" onclick="window.location.href='cart.html'">🛒</button>
                 <button class="icon" aria-label="Profile" onclick="window.location.href='signup.html'">👤</button>
                 <button class="sell-btn">Sell Now</button>
             </div>
@@ -71,89 +73,14 @@
                 <button>Jewelry</button>
             </div>
         </section>
-
         <section class="listings">
-          <h2>Listings for you</h2>
-          <div class="listing-grid">
-            <div class="listing-card">
-              <a href="listing.html?listingid=1">
-                  <img src="Photos/Honda.jpg" alt="Listing Image" class="listing-image">
-                  <div class="listing-info">
-                      <h3>Honda Civic</h3>
-                      <p>A sleek and aerodynamic front design</p>
-                      <p>$120,000</p>
-                  </div>
-              </a>
-          </div>
-              
-              <a href="listing.html?listingid=2" class="listing-card">
-                  <img src="Photos/roblox.jpg" alt="Roblox Giftcards" class="listing-image">
-                  <div class="listing-info">
-                      <h3>Roblox Giftcards</h3>
-                      <p>Fast and Quick Transactions</p>
-                      <p>$10</p>
-                  </div>
-              </a>
-              
-              <a href="listing.html?listingid=3" class="listing-card">
-                  <img src="Photos/croc.jpg" alt="Multi-Coloured Crocs" class="listing-image">
-                  <div class="listing-info">
-                      <h3>Multi-Coloured Crocs</h3>
-                      <p>Durable & Brand New</p>
-                      <p>$99.99</p>
-                  </div>
-              </a>
-              
-              <a href="listing.html?listingid=4" class="listing-card">
-                  <img src="Photos/monkey.jpg" alt="Monkey Plushie" class="listing-image">
-                  <div class="listing-info">
-                      <h3>Monkey Plushie</h3>
-                      <p>Limited Time CNY Only</p>
-                      <p>$39.99</p>
-                  </div>
-              </a>
-          </div>
-      </section>
-
-        <section class="listings">
-            <h2>Services</h2>
-            <div class="listing-grid">
-              <div class="listing-card">
-                <img src="Photos/cleaning.jpg" alt="Listing Image" class="listing-image">
-                <div class="listing-info">
-                  <h3>Cleaning Services</h3>
-                  <p>Fast & Effective Cleaning</p>
-                  <p>$50</p>
-                </div>
-              </div>
-              <div class="listing-card">
-                <img src="Photos/homework.webp" alt="Listing Image" class="listing-image">
-                <div class="listing-info">
-                  <h3>Homework Services</h3>
-                  <p>Fast & Plagarism Free</p>
-                  <p>$10</p>
-                </div>
-              </div>
-              <div class="listing-card">
-                <img src="Photos/roblox2.jpg" alt="Listing Image" class="listing-image">
-                <div class="listing-info">
-                  <h3>Roblox Grinding Services</h3>
-                  <p>Safe & Effective</p>
-                  <p>$99.99</p>
-                </div>
-              </div>
-              <div class="listing-card">
-                <img src="Photos/transport.png" alt="Listing Image" class="listing-image">
-                <div class="listing-info">
-                  <h3>Transport Services</h3>
-                  <p>Safe & Can carry bulky items</p>
-                  <p>$39.99</p>
-                </div>
-              </div>
+            <h2>Featured Listings</h2>
+            <div id="listings-container" class="listing-grid">
+            <p>Loading listings...</p>
             </div>
         </section>
 
-          <footer class="mokesell-footer">
+        <footer class="mokesell-footer">
             <div class="footer-container">
                 <div class="footer-section company-info">
                     <h3>MokeSell</h3>
@@ -174,78 +101,76 @@
                 <div class="footer-section social-media">
                     <h4>Follow Us</h4>
                     <div class="social-icons">
-                        <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                        <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-                        <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-                        <a href="#"><img src="youtube-icon.png" alt="YouTube"></a>
+                        <a href="#"><img src="Photos/facebook-icon.png" alt="Facebook"></a>
+                        <a href="#"><img src="Photos/twitter-icon.png" alt="Twitter"></a>
+                        <a href="#"><img src="Photos/instagram-icon.png" alt="Instagram"></a>
                     </div>
                 </div>
         
                 <div class="footer-section app-promotion">
                     <h4>Get the App</h4>
                     <div class="app-buttons">
-                        <img src="google-play.png" alt="Google Play">
-                        <img src="app-store.png" alt="App Store">
-                    </div>
-                    <div class="qr-code">
-                        <img src="qr-code.png" alt="QR Code">
+                        <img src="Photos/google-play.png" alt="Google Play">
+                        <img src="Photos/app-store.png" alt="App Store">
                     </div>
                 </div>
             </div>
         </footer>
     </main>
     <script>
-      // Fetch the listings from the API
-      fetch('https://mokesell-8e7e.restdb.io/rest/listings', {
-          method: 'GET',
-          headers: {
-              'x-apikey': '67a59a029c97970a4c1b2a74',
-              'Content-Type': 'application/json'
-          }
-      })
-      .then(response => response.json())
-      .then(data => {
-          const listingGrid = document.getElementById('listingGrid');
-          data.forEach(item => {
-              const listingCard = document.createElement('div');
-              listingCard.classList.add('listing-card');
-              
-              const listingImage = document.createElement('img');
-              listingImage.src = item.image;
-              listingImage.alt = item.title;
-              listingImage.classList.add('listing-image');
-              
-              const listingInfo = document.createElement('div');
-              listingInfo.classList.add('listing-info');
-              
-              const title = document.createElement('h3');
-              title.innerText = item.title;
-              
-              const description = document.createElement('p');
-              description.innerText = item.description;
-              
-              const price = document.createElement('p');
-              price.innerText = `$${item.price}`;
-  
-              // Add a click event to each listing to navigate to the listing page
-              listingCard.addEventListener('click', () => {
-                  window.location.href = `listing.html?id=${item.id}`;
-              });
-  
-              listingInfo.appendChild(title);
-              listingInfo.appendChild(description);
-              listingInfo.appendChild(price);
-              
-              listingCard.appendChild(listingImage);
-              listingCard.appendChild(listingInfo);
-  
-              listingGrid.appendChild(listingCard);
-          });
-      })
-      .catch(error => {
-          console.error('Error fetching listings:', error);
-      });
-  </script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("https://mokesell-8e7e.restdb.io/rest/listings", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-apikey": "67a59a029c97970a4c1b2a74",
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    // Shuffle the listings array
+                    const shuffledListings = data.sort(() => 0.5 - Math.random());
+    
+                    // Select a limited number of listings (e.g., 8)
+                    const selectedListings = shuffledListings.slice(0, 8);
+    
+                    // Get the listings container
+                    const listingsContainer = document.getElementById("listings-container");
+                    listingsContainer.innerHTML = ""; // Clear previous content
+                    
+                    selectedListings.forEach(listing => {
+                        // Create listing card
+                        const listingElement = document.createElement("div");
+                        listingElement.classList.add("listing-card");
+                        listingElement.onclick = () => {
+                            window.location.href = `listing.html?listingid=${listing.listingid}`;
+                        };
+    
+                        listingElement.innerHTML = `
+                            <img src="${listing.image}" alt="${listing.title}" class="listing-image">
+                            <div class="listing-info">
+                                <h3>${listing.title}</h3>
+                                <p>${listing.description.substring(0, 50)}...</p>
+                                <p class="price"><strong>$${listing.price}</strong></p>
+                            </div>
+                        `;
+    
+                        // Append listing to container
+                        listingsContainer.appendChild(listingElement);
+                    });
+                } else {
+                    document.getElementById("listings-container").innerHTML = "<p>No listings available.</p>";
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching listings:", error);
+                document.getElementById("listings-container").innerHTML = "<p>Error loading listings.</p>";
+            });
+        });
+    </script>
+    
+    
   
 </body>
 </html>
