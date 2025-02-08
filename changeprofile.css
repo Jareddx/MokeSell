@@ -1,0 +1,80 @@
+/* Change Profile Section */
+.change-profile {
+    max-width: 25%;
+    margin: 0 auto;
+    padding: 20px 0;
+    font-family: 'Arial', sans-serif; /* Neutral font stack */
+}
+
+.change-profile h2 {
+    font-size: 24px;
+    font-weight: 600; /* Semi-bold for headings */
+    margin-bottom: 20px;
+    color: #333; /* Dark gray for better readability */
+}
+
+/* Profile Form Styling */
+.profile-form {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500; /* Medium weight for labels */
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 94%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif; /* Consistent font for inputs */
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px;
+}
+
+/* Save Changes Button */
+.form-actions {
+    text-align: right;
+}
+
+
+.save-changes-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    font-weight: 500; /* Medium weight for button text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-changes-btn:hover {
+    background-color: #0056b3;
+}
