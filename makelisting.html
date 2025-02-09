@@ -151,20 +151,70 @@
         </div>
     </footer>
     <script>
-        // Enable/disable price input based on selection
-        const priceTypeRadios = document.querySelectorAll('input[name="price-type"]');
-        const priceInput = document.getElementById('price');
-
-        priceTypeRadios.forEach(radio => {
-            radio.addEventListener('change', function () {
-                if (this.value === 'price') {
-                    priceInput.disabled = false;
-                } else {
-                    priceInput.disabled = true;
-                    priceInput.value = ''; // Clear the price input
-                }
+        document.addEventListener("DOMContentLoaded", function () {
+            const priceInput = document.getElementById("price");
+            const priceRadio = document.querySelector("input[name='price-type'][value='price']");
+            const freeRadio = document.querySelector("input[name='price-type'][value='free']");
+        
+            // Disable price input initially
+            priceInput.disabled = true;
+        
+            // Enable/disable price input based on selection
+            document.querySelectorAll("input[name='price-type']").forEach(radio => {
+                radio.addEventListener("change", function () {
+                    if (priceRadio.checked) {
+                        priceInput.disabled = false;
+                        priceInput.focus();
+                    } else {
+                        priceInput.disabled = true;
+                        priceInput.value = ""; // Reset if "Free" is selected
+                    }
+                });
+            });
+        
+            // Form submission logic
+            document.querySelector(".submit-button").addEventListener("click", function(event) {
+                event.preventDefault();  // Prevent page reload
+        
+                const formData = {
+                    title: document.getElementById("listing-name").value.trim(),
+                    description: document.getElementById("description").value.trim(),
+                    price: priceRadio.checked ? parseFloat(priceInput.value) || 0 : 0,
+                    category: document.getElementById("category").value,
+                    meetup: document.getElementById("meetup").value.trim(),
+                };
+        
+                console.log("Submitting Data:", formData); // Debugging log
+        
+                // API request
+                fetch("https://mokesell-8e7e.restdb.io/rest/listings", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-apikey": "67a59a029c97970a4c1b2a74"
+                    },
+                    body: JSON.stringify(formData),
+                })
+                .then(response => {
+                    console.log("Response Status:", response.status);
+                    if (!response.ok) {
+                        throw new Error("Server response wasn't OK");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("API Response Data:", data);
+                    alert("✅ Listing created successfully!");
+                    window.location.href = "listings.html"; // Redirect to listings page
+                })
+                .catch(error => {
+                    console.error("Fetch Error:", error);
+                    alert("❌ Error creating listing. Check console for details.");
+                });
             });
         });
-    </script>
+        </script>
+        
+    
 </body>
 </html>
