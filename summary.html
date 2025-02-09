@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MokeSell - Order Summary">
+    <title>Order Summary</title>
+    <link rel="stylesheet" href="summarystyle.css">
+</head>
+<body>
+    <div class="order-summary-wrapper">
+        <header>
+            <h1>Order Summary</h1>
+        </header>
+
+        <!-- Order Details -->
+        <section class="order-details">
+            <h2>Shipping Information</h2>
+            <p><strong>Address:</strong> 1234 Street Name, City, Country</p>
+            <p><strong>Phone Number:</strong> (123) 456-7890</p>
+
+            <h2>Payment Method</h2>
+            <p><strong>Card Type:</strong> MasterCard</p>
+            <p><strong>Card Number:</strong> **** **** **** 1234</p>
+            <p><strong>Expiry Date:</strong> 12/25</p>
+        </section>
+
+        <!-- Order Items Table -->
+        <section class="order-items">
+            <h2>Order Summary</h2>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="order-items">
+                    <!-- Order items will be dynamically added here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Total Amount -->
+        <div class="order-total">
+            <p><strong>Total Amount: </strong>$<span id="total-amount">0.00</span></p>
+        </div>
+
+        <!-- Confirmation Section -->
+        <section class="confirmation">
+            <p>Your order has been successfully placed. Thank you for shopping with us!</p>
+            <button onclick="window.location.href = 'index.html';" class="go-home-btn">Go to Homepage</button>
+        </section>
+    </div>
+
+    <script>
+        // Function to load and display cart items in the order summary
+        function loadOrderSummary() {
+            // Fetch the cart items from localStorage (if available)
+            const cart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
+            const orderItemsContainer = document.getElementById('order-items');
+            const totalAmountElement = document.getElementById('total-amount');
+    
+            // Clear the cart after loading the order summary
+            localStorage.removeItem('checkoutCart'); // Empty the checkout cart from localStorage
+            localStorage.removeItem('cart'); // Also remove the cart data if it exists
+    
+            orderItemsContainer.innerHTML = ''; // Clear existing items before adding new
+    
+            let totalAmount = 0;
+    
+            // Loop through cart items and display them in table rows
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalAmount += itemTotal;
+    
+                // Create table row for each item
+                const orderItemRow = document.createElement('tr');
+    
+                orderItemRow.innerHTML = `
+                    <td>${item.title}</td>
+                    <td>$${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>$${itemTotal}</td>
+                `;
+    
+                orderItemsContainer.appendChild(orderItemRow);
+            });
+    
+            totalAmountElement.textContent = totalAmount.toFixed(2);
+        }
+    
+        // Load the order summary when the page loads
+        document.addEventListener('DOMContentLoaded', loadOrderSummary);
+    </script>
+    
+    
+</body>
+</html>

@@ -82,85 +82,84 @@
         </div>
     </footer>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get the listingid from the URL query parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const listingid = urlParams.get('listingid');  
-    
-            if (!listingid) {
-                document.getElementById('listing-details').innerHTML = "<p>Error: Listing ID not provided!</p>";
-            } else {
-                fetch(`https://mokesell-8e7e.restdb.io/rest/listings?q={"listingid":${listingid}}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-apikey": "67a59a029c97970a4c1b2a74",  // Replace with your API key
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        const listing = data[0];  
-    
-                        // Insert listing details into the HTML
-                        document.getElementById('listing-details').innerHTML = `
-                            <div class="listing-content">
-                                <div class="listing-image-container">
-                                    <img src="${listing.image}" alt="${listing.title}" class="listing-image">
-                                </div>
-                                <div class="listing-info">
-                                    <h2>${listing.title}</h2>
-                                    <p class="description">${listing.description}</p>
-                                    <p class="price">$${listing.price}</p>
-                                    <div class="buttons">
-                                        <button class="chat-btn">Chat with Seller</button>
-                                        <button class="cart-btn" id="add-to-cart-btn">Add to Cart</button>
-                                    </div>
+            document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const listingid = urlParams.get('listingid');  
+        
+        if (!listingid) {
+            document.getElementById('listing-details').innerHTML = "<p>Error: Listing ID not provided!</p>";
+        } else {
+            fetch(`https://mokesell-8e7e.restdb.io/rest/listings?q={"listingid":${listingid}}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-apikey": "67a59a029c97970a4c1b2a74",  // Replace with your API key
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    const listing = data[0];  
+                    
+                    // Insert listing details into the HTML
+                    document.getElementById('listing-details').innerHTML = `
+                        <div class="listing-content">
+                            <div class="listing-image-container">
+                                <img src="${listing.image}" alt="${listing.title}" class="listing-image">
+                            </div>
+                            <div class="listing-info">
+                                <h2>${listing.title}</h2>
+                                <p class="description">${listing.description}</p>
+                                <p class="price">$${listing.price}</p>
+                                <div class="buttons">
+                                    <button class="chat-btn" id="chat-with-seller-btn">Chat with Seller</button>
+                                    <button class="cart-btn" id="add-to-cart-btn">Add to Cart</button>
                                 </div>
                             </div>
-                        `;
-    
-                        // Event listener for the "Add to Cart" button
-                        document.getElementById("add-to-cart-btn").addEventListener("click", function () {
-                            const cartItem = {
-                                id: listing.listingid,
-                                title: listing.title,
-                                price: listing.price,
-                                image: listing.image,
-                                quantity: 1,  // Default quantity is 1
-                            };
-    
-                            // Get current cart from localStorage, or initialize an empty array if not yet created
-                            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    
-                            // Check if the item already exists in the cart
-                            const existingItemIndex = cart.findIndex(item => item.id === listing.listingid);
-    
-                            if (existingItemIndex > -1) {
-                                // If item exists, update its quantity
-                                cart[existingItemIndex].quantity += 1;
-                            } else {
-                                // If item doesn't exist, add a new item to the cart
-                                cart.push(cartItem);
-                            }
-    
-                            // Save the updated cart back to localStorage
-                            localStorage.setItem("cart", JSON.stringify(cart));
-    
-                            // Optional: Provide feedback to the user
-                            alert(`${listing.title} has been added to your cart!`);
-                        });
-                    } else {
-                        document.getElementById('listing-details').innerHTML = "<p>Listing not found.</p>";
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading listing:', error);
-                    document.getElementById('listing-details').innerHTML = "<p>Error loading listing details. Please try again later.</p>";
-                });
-            }
-        });
-    </script>
+                        </div>
+                    `;
+
+                    // Event listener for the "Chat with Seller" button
+                    document.getElementById("chat-with-seller-btn").addEventListener("click", function () {
+                        const sellerId = listing.sellerId;  // Assuming the seller's ID is part of the listing data
+
+                        // Redirect to the chat page with the seller's ID and listing ID as query params
+                        window.location.href = `chat.html?listingid=${listingid}&sellerid=${sellerId}`;
+                    });
+
+                    // Event listener for the "Add to Cart" button (existing functionality)
+                    document.getElementById("add-to-cart-btn").addEventListener("click", function () {
+                        const cartItem = {
+                            id: listing.listingid,
+                            title: listing.title,
+                            price: listing.price,
+                            image: listing.image,
+                            quantity: 1,  // Default quantity is 1
+                        };
+
+                        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                        const existingItemIndex = cart.findIndex(item => item.id === listing.listingid);
+
+                        if (existingItemIndex > -1) {
+                            cart[existingItemIndex].quantity += 1;
+                        } else {
+                            cart.push(cartItem);
+                        }
+
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        alert(`${listing.title} has been added to your cart!`);
+                    });
+                } else {
+                    document.getElementById('listing-details').innerHTML = "<p>Listing not found.</p>";
+                }
+            })
+            .catch(error => {
+                console.error('Error loading listing:', error);
+                document.getElementById('listing-details').innerHTML = "<p>Error loading listing details. Please try again later.</p>";
+            });
+        }
+    });
+ </script>
     
 </body>
 </html>

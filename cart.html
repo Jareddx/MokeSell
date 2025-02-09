@@ -156,9 +156,20 @@
 
         // Event listener for checkout button
         document.getElementById('checkout-btn').addEventListener('click', function() {
-            // Implement checkout functionality here
-            alert('Proceeding to checkout...');
-        });
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                alert('Your cart is empty! Add items before proceeding.');
+               return;
+            }
+
+            // ✅ Save cart items in localStorage for checkout
+            localStorage.setItem('checkoutCart', JSON.stringify(cart));
+
+            // ✅ Redirect to the checkout page
+            window.location.href = 'checkout.html';
+            });
+
 
         // Update the cart when the page loads
         updateCart();

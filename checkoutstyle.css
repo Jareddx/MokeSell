@@ -1,0 +1,94 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e3f2fd; /* Light blue background */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: flex-start; /* Align items to the top */
+    align-items: center; /* Center content horizontally */
+    height: 100vh;
+    padding-top: 20px; /* Adjust the padding if necessary */
+    width: 30%;  /* Limit the width to 30% of the screen */
+    margin: 0 auto;  /* Center the body horizontally */
+}
+
+/* Wrapper for the whole checkout box */
+.checkout-wrapper {
+    background-color: #ffffff; /* White box */
+    padding: 30px;
+    width: 100%;  /* Take up full width of the body */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Header inside the checkout box */
+header {
+    width: 100%;  /* Ensure header takes up full width of the body */
+    text-align: center;  /* Center the text */
+    margin-bottom: 30px;  /* Add space below the header */
+}
+
+/* Form Title */
+.checkout-wrapper h2 {
+    margin-bottom: 20px;
+    color: #1565c0; /* Dark Blue */
+}
+
+/* Form Styles */
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input {
+    width: 100%; /* Full width */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #90caf9;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Smaller MasterCard box */
+.payment-method-box {
+    background-color: #bbdefb; /* Lighter blue */
+    padding: 8px 15px; /* Reduced padding */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px; /* Smaller font size */
+    color: #0d47a1; /* Dark blue text */
+    width: fit-content; /* Box will only be as wide as the content */
+    margin: 0 auto; /* Center the box */
+}
+
+/* Proceed to OTP Button */
+.proceed-btn {
+    background-color: #0d47a1; /* Dark blue */
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: not-allowed;
+    transition: background 0.3s;
+}
+
+.proceed-btn.enabled {
+    background-color: #1976d2;
+    cursor: pointer;
+}
+
+.proceed-btn.enabled:hover {
+    background-color: #0d47a1;
+}

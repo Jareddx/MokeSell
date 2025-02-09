@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MokeSell - OTP Page">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="otpstyle.css">
+</head>
+<body>
+    <div class="otp-wrapper">
+        <header>
+            <h1>Enter OTP</h1>
+        </header>
+        <form id="otp-form" class="otp-form">
+            <label for="otp">OTP:</label>
+            <input type="text" id="otp" name="otp" required maxlength="6">
+            
+            <button type="submit" class="verify-btn">Verify OTP</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('otp-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Assuming OTP verification is successful
+            alert("OTP Verified! Proceeding to Order Summary.");
+
+            // Redirect to the order summary page
+            window.location.href = 'summary.html'; // Redirect to the order summary page
+        });
+    </script>
+</body>
+</html>
