@@ -293,13 +293,90 @@ body {
   }
   
   /* Responsive Design */
-  @media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .social-icons {
-        justify-content: center;
-    }
+  /* Responsive Design */
+@media (max-width: 1024px) {
+  .top-header, .bottom-header, .box, .footer-container {
+    max-width: 90%;
+    padding: 0 5%;
   }
+
+  .search-bar {
+    max-width: 100%;
+  }
+
+  .options-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  nav .nav-links {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .nav-icons {
+    margin-top: 10px;
+  }
+
+  .bottom-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .box {
+    padding: 15px;
+  }
+
+  .options-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 24px;
+  }
+
+  .search-btn {
+    padding: 8px 20px;
+    font-size: 10px;
+  }
+
+  .bump-container {
+    padding: 20px;
+  }
+
+  .purchase-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .footer-section {
+    min-width: 100%;
+  }
+
+  .app-buttons img {
+    width: 100px;
+  }
+}

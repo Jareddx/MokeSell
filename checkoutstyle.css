@@ -1,41 +1,36 @@
-/* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #e3f2fd; /* Light blue background */
+    background-color: #e3f2fd;
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    justify-content: flex-start; /* Align items to the top */
-    align-items: center; /* Center content horizontally */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     height: 100vh;
-    padding-top: 20px; /* Adjust the padding if necessary */
-    width: 30%;  /* Limit the width to 30% of the screen */
-    margin: 0 auto;  /* Center the body horizontally */
+    padding-top: 20px;
+    width: 30%;
+    margin: 0 auto;
 }
 
-/* Wrapper for the whole checkout box */
 .checkout-wrapper {
-    background-color: #ffffff; /* White box */
+    background-color: #ffffff;
     padding: 30px;
-    width: 100%;  /* Take up full width of the body */
+    width: 100%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-/* Header inside the checkout box */
 header {
-    width: 100%;  /* Ensure header takes up full width of the body */
-    text-align: center;  /* Center the text */
-    margin-bottom: 30px;  /* Add space below the header */
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-/* Form Title */
 .checkout-wrapper h2 {
     margin-bottom: 20px;
-    color: #1565c0; /* Dark Blue */
+    color: #1565c0;
 }
 
-/* Form Styles */
 .checkout-form {
     display: flex;
     flex-direction: column;
@@ -49,7 +44,7 @@ label {
 }
 
 input {
-    width: 100%; /* Full width */
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #90caf9;
@@ -57,23 +52,21 @@ input {
     font-size: 14px;
 }
 
-/* Smaller MasterCard box */
 .payment-method-box {
-    background-color: #bbdefb; /* Lighter blue */
-    padding: 8px 15px; /* Reduced padding */
+    background-color: #bbdefb;
+    padding: 8px 15px;
     border-radius: 5px;
     margin-bottom: 20px;
     font-weight: bold;
     text-align: center;
-    font-size: 14px; /* Smaller font size */
-    color: #0d47a1; /* Dark blue text */
-    width: fit-content; /* Box will only be as wide as the content */
-    margin: 0 auto; /* Center the box */
+    font-size: 14px;
+    color: #0d47a1;
+    width: fit-content;
+    margin: 0 auto;
 }
 
-/* Proceed to OTP Button */
 .proceed-btn {
-    background-color: #0d47a1; /* Dark blue */
+    background-color: #0d47a1;
     color: white;
     padding: 12px;
     border: none;
@@ -91,4 +84,64 @@ input {
 
 .proceed-btn.enabled:hover {
     background-color: #0d47a1;
+}
+
+@media (max-width: 768px) {
+    body {
+        width: 90%;
+        padding-top: 10px;
+    }
+
+    .checkout-wrapper {
+        padding: 20px;
+    }
+
+    .checkout-wrapper h2 {
+        font-size: 18px;
+    }
+
+    input {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .proceed-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .payment-method-box {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        width: 100%;
+        padding-top: 5px;
+    }
+
+    .checkout-wrapper {
+        padding: 15px;
+    }
+
+    .checkout-wrapper h2 {
+        font-size: 16px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .proceed-btn {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .payment-method-box {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
 }

@@ -329,5 +329,77 @@ body {
     .social-icons {
         justify-content: center;
     }
-  }
+
+    /* Adjust Header layout */
+    .top-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    /* Logo adjustment */
+    .logo {
+        margin-bottom: 15px;
+    }
+
+    /* Nav adjustment */
+    nav .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .nav-icons {
+        margin-top: 20px;
+    }
+
+    .bottom-header {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Listing page layout */
+    .listing-container {
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .listing-content {
+        flex-direction: column;
+        gap: 15px;
+        margin-left: 0;
+    }
+
+    .listing-image-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .listing-info {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+    }
+
+    .search-bar input {
+        font-size: 14px;
+    }
+}
+
+.loader {
+  border: 8px solid #f3f3f3; /* Light gray */
+  border-top: 8px solid #3498db; /* Blue color */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 

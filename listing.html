@@ -16,7 +16,7 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="#">Electronics</a></li>
-                    <li><a href="#">Fashion</a></li>
+                    <li><a href="#">Fashion</a></li>                    
                     <li><a href="#">Services</a></li>
                     <li><a href="#">Games</a></li>
                     <li><a href="#">Luxury</a></li>
@@ -31,7 +31,7 @@
                 </a>
                 <button class="icon" aria-label="Cart" onclick="window.location.href='cart.html'">🛒</button>
                 <button class="icon" aria-label="Profile" onclick="window.location.href='signup.html'">👤</button>
-                <button class="sell-btn">Sell Now</button>
+                <button class="sell-btn" onclick="window.location.href='makelisting.html'">Sell Now</button>
             </div>
         </div>
 
@@ -39,14 +39,14 @@
             <div class="search-bar">
                 <input type="text" placeholder="Search for an item..." aria-label="Search">
             </div>
-            <button class="search-btn">Search</button>
+            <button class="search-btn" onclick="window.location.href='youraccount.html'">Profile</button>
         </div>
     </header>
 
     <main>
         <div id="listing-details" class="listing-container">
-            <p>Loading listing details...</p>
-        </div>
+            <div class="loader"></div> <!-- Spinner element -->
+        </div>        
     </main>
 
     <footer class="mokesell-footer">
@@ -86,84 +86,88 @@
         </div>
     </footer>
     <script>
-            document.addEventListener("DOMContentLoaded", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const listingid = urlParams.get('listingid');  
-        
-        if (!listingid) {
-            document.getElementById('listing-details').innerHTML = "<p>Error: Listing ID not provided!</p>";
-        } else {
-            fetch(`https://mokesell-8e7e.restdb.io/rest/listings?q={"listingid":${listingid}}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-apikey": "67a59a029c97970a4c1b2a74",  // Replace with your API key
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    const listing = data[0];  
-                    
-                    // Insert listing details into the HTML
-                    document.getElementById('listing-details').innerHTML = `
-                        <div class="listing-content">
-                            <div class="listing-image-container">
-                                <img src="${listing.image}" alt="${listing.title}" class="listing-image">
-                            </div>
-                            <div class="listing-info">
-                                <h2>${listing.title}</h2>
-                                <p class="description">${listing.description}</p>
-                                <p class="price">$${listing.price}</p>
-                                <div class="buttons">
-                                    <button class="chat-btn" id="chat-with-seller-btn">Chat with Seller</button>
-                                    <button class="cart-btn" id="add-to-cart-btn">Add to Cart</button>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const listingid = urlParams.get('listingid');  
+            
+            if (!listingid) {
+                document.getElementById('listing-details').innerHTML = "<p>Error: Listing ID not provided!</p>";
+            } else {
+                // Show the spinner while fetching the data
+                document.getElementById('listing-details').innerHTML = '<div class="loader"></div>';
+    
+                fetch(`https://mokesell-8e7e.restdb.io/rest/listings?q={"listingid":${listingid}}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-apikey": "67a59a029c97970a4c1b2a74",  // Replace with your API key
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const listing = data[0];  
+    
+                        // Hide the spinner and insert listing details into the HTML
+                        document.getElementById('listing-details').innerHTML = `
+                            <div class="listing-content">
+                                <div class="listing-image-container">
+                                    <img src="${listing.image}" alt="${listing.title}" class="listing-image">
+                                </div>
+                                <div class="listing-info">
+                                    <h2>${listing.title}</h2>
+                                    <p class="description">${listing.description}</p>
+                                    <p class="price">$${listing.price}</p>
+                                    <div class="buttons">
+                                        <button class="chat-btn" id="chat-with-seller-btn">Chat with Seller</button>
+                                        <button class="cart-btn" id="add-to-cart-btn">Add to Cart</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    `;
-
-                    // Event listener for the "Chat with Seller" button
-                    document.getElementById("chat-with-seller-btn").addEventListener("click", function () {
-                        const sellerId = listing.sellerId;  // Assuming the seller's ID is part of the listing data
-
-                        // Redirect to the chat page with the seller's ID and listing ID as query params
-                        window.location.href = `chat.html?listingid=${listingid}&sellerid=${sellerId}`;
-                    });
-
-                    // Event listener for the "Add to Cart" button (existing functionality)
-                    document.getElementById("add-to-cart-btn").addEventListener("click", function () {
-                        const cartItem = {
-                            id: listing.listingid,
-                            title: listing.title,
-                            price: listing.price,
-                            image: listing.image,
-                            quantity: 1,  // Default quantity is 1
-                        };
-
-                        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-                        const existingItemIndex = cart.findIndex(item => item.id === listing.listingid);
-
-                        if (existingItemIndex > -1) {
-                            cart[existingItemIndex].quantity += 1;
-                        } else {
-                            cart.push(cartItem);
-                        }
-
-                        localStorage.setItem("cart", JSON.stringify(cart));
-                        alert(`${listing.title} has been added to your cart!`);
-                    });
-                } else {
-                    document.getElementById('listing-details').innerHTML = "<p>Listing not found.</p>";
-                }
-            })
-            .catch(error => {
-                console.error('Error loading listing:', error);
-                document.getElementById('listing-details').innerHTML = "<p>Error loading listing details. Please try again later.</p>";
-            });
-        }
-    });
- </script>
+                        `;
+    
+                        // Event listener for the "Chat with Seller" button
+                        document.getElementById("chat-with-seller-btn").addEventListener("click", function () {
+                            const sellerId = listing.sellerId;  // Assuming the seller's ID is part of the listing data
+    
+                            // Redirect to the chat page with the seller's ID and listing ID as query params
+                            window.location.href = `chat.html?listingid=${listingid}&sellerid=${sellerId}`;
+                        });
+    
+                        // Event listener for the "Add to Cart" button (existing functionality)
+                        document.getElementById("add-to-cart-btn").addEventListener("click", function () {
+                            const cartItem = {
+                                id: listing.listingid,
+                                title: listing.title,
+                                price: listing.price,
+                                image: listing.image,
+                                quantity: 1,  // Default quantity is 1
+                            };
+    
+                            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                            const existingItemIndex = cart.findIndex(item => item.id === listing.listingid);
+    
+                            if (existingItemIndex > -1) {
+                                cart[existingItemIndex].quantity += 1;
+                            } else {
+                                cart.push(cartItem);
+                            }
+    
+                            localStorage.setItem("cart", JSON.stringify(cart));
+                            alert(`${listing.title} has been added to your cart!`);
+                        });
+                    } else {
+                        document.getElementById('listing-details').innerHTML = "<p>Listing not found.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading listing:', error);
+                    document.getElementById('listing-details').innerHTML = "<p>Error loading listing details. Please try again later.</p>";
+                });
+            }
+        });
+    </script>
+    
     
 </body>
 </html>

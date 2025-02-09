@@ -1,4 +1,3 @@
-/* chatstyle.css */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f0f0;
@@ -188,4 +187,102 @@ header {
     font-size: 20px;
     font-weight: bold;
     color: #333;
+}
+
+@media (max-width: 768px) {
+    /* Header Layout Adjustments */
+    .top-header {
+        flex-direction: column;
+        padding: 0 5%;
+    }
+
+    .logo {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    nav {
+        display: block;
+    }
+
+    .nav-links {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .nav-links li a {
+        font-size: 14px;
+        padding: 5px 0;
+    }
+
+    .nav-icons {
+        margin-left: 0;
+        margin-top: 10px;
+        justify-content: center;
+    }
+
+    .sell-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* Search bar and button adjustments */
+    .search-bar input {
+        font-size: 14px;
+    }
+
+    .search-btn {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    /* Chat container for mobile */
+    .chat-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .chat-box {
+        height: 200px;
+    }
+
+    /* Adjust message input width */
+    #message-input {
+        width: 70%;
+    }
+
+    #send-btn {
+        width: 25%;
+    }
+}
+
+/* Media Queries for Very Small Screens (mobile) */
+@media (max-width: 480px) {
+    /* Reduce the size of the chat container further */
+    .chat-container {
+        width: 95%;
+    }
+
+    .chat-box {
+        height: 150px;
+    }
+
+    #message-input {
+        font-size: 14px;
+        width: 65%;
+    }
+
+    #send-btn {
+        font-size: 14px;
+        width: 30%;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-links li a {
+        font-size: 16px;
+    }
 }

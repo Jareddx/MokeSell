@@ -448,14 +448,122 @@ nav .nav-links li a:hover {
   margin-top: 10px;
 }
 
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto; /* Center it */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 /* Responsive Design */
-@media (max-width: 768px) {
-  .footer-container {
-      flex-direction: column;
-      text-align: center;
+@media (max-width: 1024px) {
+  .top-header, .bottom-header, .promo-section, .categories, .listings, .footer-container {
+    max-width: 90%;
+    padding: 0 5%;
   }
-  
+
+  .search-bar {
+    max-width: 100%;
+  }
+
+  .listing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  nav .nav-links {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .nav-icons {
+    margin-top: 10px;
+  }
+
+  .bottom-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .promo-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .promo-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .promo-text {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .promo-image {
+    width: 80%;
+  }
+
+  .listing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
   .social-icons {
-      justify-content: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 24px;
+  }
+
+  .search-btn {
+    padding: 8px 20px;
+    font-size: 10px;
+  }
+
+  .promo-image {
+    width: 100%;
+  }
+
+  .listing-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .category-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .category-buttons button {
+    width: 80%;
   }
 }
